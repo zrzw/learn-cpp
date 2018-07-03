@@ -63,6 +63,35 @@ std::istream& operator>>(std::istream& is, struct Graph& g)
   return is;
 }
 
+bool is_in(const std::vector<char>& l, char c)
+{
+  for(auto a: l){
+    if(a == c)
+      return true;
+  }
+  return false;
+}
+
+bool path(const struct Graph& g, char from, char to)
+{
+  std::vector<char> open, closed;
+  open.push_back(from);
+  while(!open.empty()){
+    char test = open.back();
+    open.pop_back();
+    if(test == to)
+      return true;
+    else
+      closed.push_back(test);
+    for(auto node: g.paths.at(test)){
+      //add to open list if not already in closed
+      if(!is_in(closed, node))
+        open.push_back(node);
+    }
+  }
+  return false;
+}
+
 int main()
 {
   struct Graph g;
@@ -70,7 +99,17 @@ int main()
   init_graph(g, my_nodes);
   add_path(g, 'a', 'b');
   add_path(g, 'c', 'a');
+  std::cout << "add a node in the format (c, d): ";
   std::cin >> g;
   std::cout << g;
+  std::cout << "is there a path from... " << std::endl;
+  char from, to;
+  std::cin >> from;
+  std::cout << "to...";
+  std::cin >> to;
+  if(path(g, from, to))
+    std::cout << "yes" << std::endl;
+  else
+    std::cout << "no" << std::endl;
   return 0;
 }
