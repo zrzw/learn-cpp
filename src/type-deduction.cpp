@@ -29,11 +29,15 @@ void update_at_index(std::vector<T>& v, const T* item, int index)
 template<typename T>
 std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
 {
-  os << "{ ";
+  os << "{";
+  int count = 0;
   for(auto& a: v){
-    os << a << ",";
+    os << a;
+    if(count < v.size()-1)
+      os << ",";
+    ++count;
   }
-  os << " }";
+  os << "}";
   return os;
 }
 
