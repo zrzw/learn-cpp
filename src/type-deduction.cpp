@@ -20,8 +20,9 @@ void update_at_index(std::vector<T>& v, const T* item, int index)
 {
   auto i {0};
   for(auto& a: v){
-    if(i == index)
+    if(i == index){
       a = *item;
+    }
     i++;
   }
 }
@@ -56,6 +57,8 @@ int main()
   //T is type const vector<int>
   //when 'c' is passed, it's 'referenceness' is ignored during type deduction
   //ie T is not deducted to be const int&
+  std::cout << vi << std::endl;
+  update_at_index(vi, &a, 1);
   std::cout << vi << std::endl;
   return 0;
 }
