@@ -19,6 +19,9 @@ template<typename T>
 void update_at_index(std::vector<T>& v, const T* item, int index)
 {
   auto i {0};
+  /* Item 2: auto. In C++11, i would be a initializer_list<int>
+   * from C++14, only the auto a = { 0 } syntax would result in an initializer
+   * list. In this case, the type of i is deduced from the single element. */
   for(auto& a: v){
     if(i == index){
       a = *item;
@@ -42,6 +45,12 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
   return os;
 }
 
+template<typename T, std::size_t N>
+constexpr std::size_t array_size(T (&a)[N])
+{
+  return N;
+}
+
 int main()
 {
   std::vector<int> vi {2,4,8,10,12};
@@ -60,5 +69,8 @@ int main()
   std::cout << vi << std::endl;
   update_at_index(vi, &a, 1);
   std::cout << vi << std::endl;
+  // array to pointer decay:
+  const char name[] = "Fred Wesley";
+  std::cout << "size of name[]= " << array_size(name) << std::endl;
   return 0;
 }
