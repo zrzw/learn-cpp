@@ -13,6 +13,7 @@ int main()
     for_each(v.begin(), v.end(), f);
     int factor = 3;
     std::vector<int> acc;
+    // if element is divisible by 2, times by 3 and add to acc
     for_each(v.begin(), v.end(),
         [factor, &acc] (int x){
             if(x % 2 == 0)
