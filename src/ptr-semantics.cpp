@@ -4,7 +4,7 @@
 class B{
 public:
 	B() : v(42.0){ std::cout << "B ctor\n"; }
-	// without 'virtual', ~D() does not get called when accessed with a B*
+	// without 'virtual', derived destructors will not be called
 	virtual ~B(){ std::cout << "B dtor\n"; }
 	B(B& b) : v(b.v){ std::cout << "B copy\n"; }
 	B& operator=(const B&) = default;
