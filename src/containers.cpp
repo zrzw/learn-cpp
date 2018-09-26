@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <unordered_map>
 
 char upper_case(const char& x){
     if(x >= 97 && x <= 122)
@@ -37,6 +38,14 @@ void print_list(std::vector<T>& v)
     std::cout << std::endl;
 }
 
+template<typename T, typename U>
+void print_map(std::unordered_map<T, U>& m){
+        for(auto& p: m){
+            std::cout << p.first << ":" << m[p.first] << ", ";
+        }
+        std::cout << std::endl;
+}
+
 int main()
 {
     using std::vector;
@@ -46,5 +55,12 @@ int main()
     print_list(fruits);
     sort(fruits.begin(), fruits.end(), Nocase());
     print_list(fruits);
+    using std::unordered_map;
+    unordered_map<string, int> directory {
+            {"Bob", 123},
+            {"Carl", 456},
+            {"Harry", 707}
+    };
+    print_map(directory);
     return 0;
 }
