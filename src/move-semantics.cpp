@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 unsigned int gbl_obj_counter = 0;
 
@@ -54,6 +55,17 @@ int main(){
 	std::cout << movedV << std::endl;
     /* to see move constructors, compile with -fno-elide-constructors */
 	V v3 = defaultV();
+	/* move constructors and vector<>*/
+	using std::vector;
+	vector<V> vs;
+	vs.reserve(2);
+	std::cout << "start of vector test:" << std::endl;
+	vs.push_back(std::move(movedV));
+	vs.push_back(std::move(v2));
+	// size of vs is 2 initially, so before the 3rd V can be inserted,
+	// all elements have to be moved. In total 5 objects are created (2 deleted)
+	// to ensure only 3 objects are created, reserve 3 elements in vs.
+	vs.push_back(std::move(v3));
 	std::cout << "end of main()" << std::endl;
 	return 0;
 }
